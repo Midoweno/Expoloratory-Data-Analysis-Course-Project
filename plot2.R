@@ -1,11 +1,12 @@
-## This first line will likely take a few seconds. Be patient!
 NEI <- readRDS("summarySCC_PM25.rds")
 SCC <- readRDS("Source_Classification_Code.rds")
 
-row1999<-NEI[NEI$year==1999,]
-row2002<-NEI[NEI$year==2002,]
-row2005<-NEI[NEI$year==2005,]
-row2008<-NEI[NEI$year==2008,]
+baltimore<-NEI[NEI$fips=="24510",]
+
+row1999<-baltimore[baltimore$year==1999,]
+row2002<-baltimore[baltimore$year==2002,]
+row2005<-baltimore[baltimore$year==2005,]
+row2008<-baltimore[baltimore$year==2008,]
 
 df<-data.frame(
   year=c(1999,2002,2005,2008),
@@ -14,15 +15,14 @@ df<-data.frame(
               sum(row2005$Emissions),
               sum(row2008$Emissions))
 )
-
-png("plot1.png",width=480,height=480)
+png("plot2.png",width=480,height=480)
 plot(df$year,df$emissions,
      ylab="Total Emissions",
      xlab="Year",
      xaxt="n",
      color="blue",
      pch=17,
-     main="United States Total Emissions per Year",
+     main="Baltimore City Total Emissions per Year",
      cex=2)
 ##axis cannot be an arg in plot()
 axis(1,
